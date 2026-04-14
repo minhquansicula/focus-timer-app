@@ -4,7 +4,6 @@ FocusTimerApp is a feature-rich, productivity-enhancing WPF desktop application 
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-512BD4?style=flat&logo=dotnet)
 ![WPF](https://img.shields.io/badge/WPF-MVVM-00599C?style=flat&logo=windows)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 ## Key Features
 
