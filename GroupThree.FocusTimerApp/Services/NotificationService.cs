@@ -1,4 +1,10 @@
-﻿namespace GroupThree.FocusTimerApp.Services
+﻿using GroupThree.FocusTimerApp.Models;
+using System;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using TagLib;
+
+namespace GroupThree.FocusTimerApp.Services
 {
     public static class NotificationService
     {
@@ -35,7 +41,7 @@
             {
                 var notify = new NotifyIcon
                 {
-                    Icon = Properties.Resources.AppIcon,
+                    Icon = System.Drawing.SystemIcons.Information,
                     Visible = true,
                     BalloonTipTitle = title,
                     BalloonTipText = text

@@ -1,8 +1,11 @@
-﻿using System.Windows.Input;
-using GroupThree.FocusTimerApp.Commands;
-using GroupThree.FocusTimerApp.Services;
-using System.Collections.ObjectModel;
+﻿using GroupThree.FocusTimerApp.Commands;
 using GroupThree.FocusTimerApp.Models;
+using GroupThree.FocusTimerApp.Services;
+using System;
+using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using System.Windows.Input;
+using TagLib;
 
 namespace GroupThree.FocusTimerApp.ViewModels
 {
@@ -162,9 +165,9 @@ namespace GroupThree.FocusTimerApp.ViewModels
             _mediaPlayback = mediaPlayback;
 
             // setup tray icon for notifications with custom icon
-            _notifyIcon = new System.Windows.Forms.NotifyIcon()
+            _notifyIcon = new NotifyIcon()
             {
-                Icon = Properties.Resources.AppIcon,
+                Icon = System.Drawing.SystemIcons.Application,
                 Visible = false, // Start hidden, will be shown based on RunInBackground setting
                 Text = "Focus Timer"
             };
@@ -232,19 +235,19 @@ namespace GroupThree.FocusTimerApp.ViewModels
 
         private void ConfigureTrayIcon()
         {
-            var menu = new System.Windows.Forms.ContextMenuStrip();
-            var openItem = new System.Windows.Forms.ToolStripMenuItem("Open");
+            var menu = new ContextMenuStrip();
+            var openItem = new ToolStripMenuItem("Open");
 
             openItem.Click += (s, e) => ShowMainWindow();
 
-            var settingsItem = new System.Windows.Forms.ToolStripMenuItem("Settings");
+            var settingsItem = new ToolStripMenuItem("Settings");
             settingsItem.Click += (s, e) => _windowService.ShowSettingsWindow();
-            var exitItem = new System.Windows.Forms.ToolStripMenuItem("Exit");
+            var exitItem = new ToolStripMenuItem("Exit");
             exitItem.Click += (s, e) => ExitApp();
 
             menu.Items.Add(openItem);
             menu.Items.Add(settingsItem);
-            menu.Items.Add(new System.Windows.Forms.ToolStripSeparator());
+            menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add(exitItem);
 
             _notifyIcon.ContextMenuStrip = menu;
@@ -332,7 +335,7 @@ namespace GroupThree.FocusTimerApp.ViewModels
         private void OnFinished(object? s, EventArgs e)
         {
             // Use NotificationService which checks EnableNotifications setting
-            NotificationService.Show("Focus Timer", "Phase finished.", System.Windows.Forms.ToolTipIcon.Info);
+            NotificationService.Show("Focus Timer", "Phase finished.", ToolTipIcon.Info);
 
             IsTimerRunning = _timerService.IsRunning;
             CanPauseResume = false; // finished means no active session
@@ -342,7 +345,7 @@ namespace GroupThree.FocusTimerApp.ViewModels
         private void OnNotificationRequested(object? s, string message)
         {
             // Use NotificationService which checks EnableNotifications setting
-            NotificationService.Show("Focus Timer", message, System.Windows.Forms.ToolTipIcon.Info);
+            NotificationService.Show("Focus Timer", message, ToolTipIcon.Info);
         }
 
         public void Start()
